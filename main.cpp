@@ -9,6 +9,8 @@ struct node {
 
 node* head = NULL;
 node* tail = NULL;
+node* awal = NULL;
+node* akhir = NULL;
 
 void tambahdepan(int x, node* &headpro, node* &tailpro) {
     node* baru = new node;
@@ -20,6 +22,19 @@ void tambahdepan(int x, node* &headpro, node* &tailpro) {
     } else {
         baru->next = headpro;
         headpro = baru;
+    }
+}
+
+void tambahbelakang(int x, node* &headpro, node* &tailpro) {
+    node* baru = new node;
+    baru->next = NULL;
+    baru->info = x;
+    if (headpro == NULL) {
+        headpro = baru;
+        tailpro = baru;
+    } else {
+        tailpro->next = baru;
+        tailpro = baru;
     }
 }
 
@@ -46,5 +61,13 @@ int main() {
     tambahdepan(40, head, tail);
     tambahdepan(50, head, tail);
 
+
+    tambahbelakang(10, awal, akhir);
+    tambahbelakang(20, awal, akhir);
+    tambahbelakang(30, awal, akhir);
+    tambahbelakang(40, awal, akhir);
+    tambahbelakang(50, awal, akhir);
+
     tampildepan(head);
+    tampildepan(awal);
 }
