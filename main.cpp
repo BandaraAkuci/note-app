@@ -11,6 +11,8 @@ node* head = NULL;
 node* tail = NULL;
 node* awal = NULL;
 node* akhir = NULL;
+node* depan = NULL;
+node* belakang = NULL;
 
 void tambahdepan(int x, node* &headpro, node* &tailpro) {
     node* baru = new node;
@@ -38,8 +40,27 @@ void tambahbelakang(int x, node* &headpro, node* &tailpro) {
     }
 }
 
+void tambahtengahBH(int x, node* headpro, node* tailpro)
+{
+    node* baru = new node;
+    baru->next = NULL;
+    baru->info = x;
+    if (headpro == NULL) {
+        headpro = baru;
+        tailpro = baru;
+    } else {
+        if (headpro == tailpro) {
+            tailpro->next = baru;
+            tailpro = baru;
+        } else {
+            baru->next = head->next;
+            head->next = baru;
+        }
+    }
+}
 
-void tampildepan(node* headpro) {
+
+void tampil(node* headpro) {
     if (headpro == NULL) {
         cout << "KOSONG" << endl;
     } else {
@@ -68,8 +89,15 @@ int main() {
     tambahbelakang(40, awal, akhir);
     tambahbelakang(50, awal, akhir);
 
-    tampildepan(head);
-    tampildepan(awal);
+    tambahtengahBH(10, depan, belakang);
+    tambahtengahBH(20, depan, belakang);
+    tambahtengahBH(30, depan, belakang);
+    tambahtengahBH(40, depan, belakang);
+    tambahtengahBH(50, depan, belakang);
+
+    tampil(head);
+    tampil(awal);
+    tampil(depan);
 }
 
 // test
