@@ -13,6 +13,8 @@ node* awal = NULL;
 node* akhir = NULL;
 node* depan = NULL;
 node* belakang = NULL;
+node* atas = NULL;
+node* bawah = NULL;
 
 void tambahdepan(int x, node* &headpro, node* &tailpro) {
     node* baru = new node;
@@ -40,7 +42,7 @@ void tambahbelakang(int x, node* &headpro, node* &tailpro) {
     }
 }
 
-void tambahtengahBH(int x, node* headpro, node* tailpro)
+void tambahtengahBH(int x, node* &headpro, node* &tailpro)
 {
     node* baru = new node;
     baru->next = NULL;
@@ -53,12 +55,29 @@ void tambahtengahBH(int x, node* headpro, node* tailpro)
             tailpro->next = baru;
             tailpro = baru;
         } else {
-            baru->next = head->next;
-            head->next = baru;
+            baru->next = headpro->next;
+            headpro->next = baru;
         }
     }
 }
 
+void tambahtengahDH(int x, node* &headpro, node* &tailpro) {
+    node* baru = new node;
+    baru->next = NULL;
+    baru->info = x;
+    if (headpro == NULL) {
+        headpro = baru;
+        tailpro = baru;
+    } else {
+        if (headpro == tailpro) {
+            baru->next = headpro;
+            headpro = baru;
+        } else {
+            baru->next = headpro->next;
+            headpro->next = baru;
+        }
+    }
+}
 
 void tampil(node* headpro) {
     if (headpro == NULL) {
@@ -82,7 +101,6 @@ int main() {
     tambahdepan(40, head, tail);
     tambahdepan(50, head, tail);
 
-
     tambahbelakang(10, awal, akhir);
     tambahbelakang(20, awal, akhir);
     tambahbelakang(30, awal, akhir);
@@ -95,9 +113,16 @@ int main() {
     tambahtengahBH(40, depan, belakang);
     tambahtengahBH(50, depan, belakang);
 
+    tambahtengahDH(10, atas, bawah);
+    tambahtengahDH(20, atas, bawah);
+    tambahtengahDH(30, atas, bawah);
+    tambahtengahDH(40, atas, bawah);
+    tambahtengahDH(50, atas, bawah);
+
     tampil(head);
     tampil(awal);
     tampil(depan);
+    tampil(atas);
 }
 
 // test
