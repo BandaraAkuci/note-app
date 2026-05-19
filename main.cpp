@@ -17,6 +17,8 @@ node* atas = NULL;
 node* bawah = NULL;
 node* kiri = NULL;
 node* kanan = NULL;
+node* maju = NULL;
+node* mundur = NULL;
 
 void tambahdepan(int x, node* &headpro, node* &tailpro) {
     node* baru = new node;
@@ -84,7 +86,7 @@ void tambahtengahDH(int x, node* &headpro, node* &tailpro) {
 void tambahtengahBT(int x, node* &headpro, node* &tailpro) {
     node* baru = new node;
     baru->next = NULL;
-    baru->info = X;
+    baru->info = x;
     if (headpro == NULL) {
         headpro = baru;
         tailpro = baru;
@@ -103,6 +105,49 @@ void tambahtengahBT(int x, node* &headpro, node* &tailpro) {
         }
     }
 }
+
+void tambahtengahDT(int x, node* &headpro, node* &tailpro) {
+    node* baru = new node;
+    baru->next = NULL;
+    baru->info = x;
+    if (headpro == NULL) {
+        headpro = baru;
+        tailpro = baru;
+    } else {
+        if (headpro == tailpro) {
+            baru->next = headpro;
+            headpro = baru;
+        } else {
+            node* bantuan = new node;
+            bantuan = headpro;
+            while (bantuan->next != tailpro) {
+                bantuan = bantuan->next;
+            }
+            baru->next = bantuan->next;
+            bantuan->next = baru;
+        }
+    }
+}
+
+// void tambahtengahpure(int x, node* &headpro, node* &tailpro) {
+//     node* baru = new node;
+//     baru->next = NULL;
+//     baru->info = x;
+//     if (headpro == NULL) {
+//         headpro = baru;
+//         tailpro = baru;
+//     } else {
+//         if (headpro == tailpro) {
+//             baru->next = headpro;
+//             headpro = baru;
+//         } else {
+//             node* bantuankiri = new node;
+//             node* bantuankanan = new node;
+//             bantuankiri = headpro;
+
+//         }
+//     }
+// }
 
 void tampil(node* headpro) {
     if (headpro == NULL) {
@@ -144,17 +189,24 @@ int main() {
     tambahtengahDH(40, atas, bawah);
     tambahtengahDH(50, atas, bawah);
 
-    tambahtengahBH(10, kiri, kanan);
-    tambahtengahBH(20, kiri, kanan);
-    tambahtengahBH(30, kiri, kanan);
-    tambahtengahBH(40, kiri, kanan);
-    tambahtengahBH(50, kiri, kanan);
+    tambahtengahBT(10, kiri, kanan);
+    tambahtengahBT(20, kiri, kanan);
+    tambahtengahBT(30, kiri, kanan);
+    tambahtengahBT(40, kiri, kanan);
+    tambahtengahBT(50, kiri, kanan);
+
+    tambahtengahDT(10, maju, mundur);
+    tambahtengahDT(20, maju, mundur);
+    tambahtengahDT(30, maju, mundur);
+    tambahtengahDT(40, maju, mundur);
+    tambahtengahDT(50, maju, mundur);
 
     tampil(head);
     tampil(awal);
     tampil(depan);
     tampil(atas);
     tampil(kiri);
+    tampil(maju);
 }
 
 // test
