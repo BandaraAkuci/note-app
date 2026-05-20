@@ -154,10 +154,41 @@ void hapusdepan(node* &headpro, node* &tailpro) {
     if (headpro == NULL) {
         cout << "Kosong" << endl;
     } else {
-        hapus = headpro;
-        headpro = headpro->next;
-        delete(hapus);
-        hapus->next = NULL;
+        if (headpro == tailpro) {
+            hapus = headpro;
+            headpro = NULL;
+            tailpro = NULL;
+            delete(hapus);
+        } else {
+            hapus = headpro;
+            headpro = headpro->next;
+            delete(hapus);
+            hapus->next = NULL;
+        }
+    }
+}
+
+void hapusbelakang(node* &headpro, node* &tailpro) {
+    node* hapus = new node;
+    if (headpro == NULL) {
+        cout << "Kosong" << endl;
+    } else {
+        if (headpro == tailpro) {
+            hapus = headpro;
+            headpro = NULL;
+            tailpro = NULL;
+            delete(hapus);
+        } else {
+            node* bantuan = new node;
+            bantuan = headpro;
+            while (bantuan->next != tailpro) {
+                bantuan = bantuan->next;
+            }
+            hapus = bantuan->next;
+            tailpro = bantuan;
+            delete(hapus);
+            tailpro->next = NULL;
+        }
     }
 }
 
@@ -223,7 +254,11 @@ int main() {
     hapusdepan(maju, mundur);
     hapusdepan(maju, mundur);
 
+    hapusbelakang(kiri, kanan);
+    hapusbelakang(kiri, kanan);
+
     tampil(maju);
+    tampil(kiri);
 }
 
 // test
