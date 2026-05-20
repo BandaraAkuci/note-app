@@ -149,6 +149,18 @@ void tambahtengahDT(int x, node* &headpro, node* &tailpro) {
 //     }
 // }
 
+void hapusdepan(node* &headpro, node* &tailpro) {
+    node* hapus = new node;
+    if (headpro == NULL) {
+        cout << "Kosong" << endl;
+    } else {
+        hapus = headpro;
+        headpro = headpro->next;
+        delete(hapus);
+        hapus->next = NULL;
+    }
+}
+
 void tampil(node* headpro) {
     if (headpro == NULL) {
         cout << "KOSONG" << endl;
@@ -206,6 +218,11 @@ int main() {
     tampil(depan);
     tampil(atas);
     tampil(kiri);
+    tampil(maju);
+    
+    hapusdepan(maju, mundur);
+    hapusdepan(maju, mundur);
+
     tampil(maju);
 }
 
