@@ -192,6 +192,32 @@ void hapusbelakang(node* &headpro, node* &tailpro) {
     }
 }
 
+void hapustengah(node* &headpro, node* &tailpro) {
+    node* hapus = new node;
+    if (headpro == NULL) {
+        cout << "Kosong" << endl;
+    } else {
+        if (headpro->next == tailpro) {
+            hapus = headpro;
+            headpro = headpro->next;
+            delete(hapus);
+            hapus->next = NULL;
+        } else {
+            if (headpro == tailpro) {
+                hapus = headpro;
+                headpro = NULL;
+                tailpro = NULL;
+                delete(hapus);
+            } else {
+                hapus = headpro->next;
+                headpro->next = hapus->next;
+                delete(hapus);
+                hapus->next = NULL;
+            }
+        }
+    }
+}
+
 void tampil(node* headpro) {
     if (headpro == NULL) {
         cout << "KOSONG" << endl;
@@ -257,8 +283,11 @@ int main() {
     hapusbelakang(kiri, kanan);
     hapusbelakang(kiri, kanan);
 
+    hapustengah(atas, bawah);
+
     tampil(maju);
     tampil(kiri);
+    tampil(atas);
 }
 
 // test
