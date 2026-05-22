@@ -7,6 +7,12 @@ struct node {
     node* next;
 };
 
+struct dll {
+    int info;
+    dll* prev;
+    dll* next;
+}
+
 node* head = NULL;
 node* tail = NULL;
 node* awal = NULL;
@@ -19,6 +25,8 @@ node* kiri = NULL;
 node* kanan = NULL;
 node* maju = NULL;
 node* mundur = NULL;
+ddl* buka = NULL;
+ddl* tutup = NULL;
 
 void tambahdepan(int x, node* &headpro, node* &tailpro) {
     node* baru = new node;
@@ -192,7 +200,7 @@ void hapusbelakang(node* &headpro, node* &tailpro) {
     }
 }
 
-void hapustengah(node* &headpro, node* &tailpro) {
+void hapustengahD(node* &headpro, node* &tailpro) {
     node* hapus = new node;
     if (headpro == NULL) {
         cout << "Kosong" << endl;
@@ -214,6 +222,18 @@ void hapustengah(node* &headpro, node* &tailpro) {
                 delete(hapus);
                 hapus->next = NULL;
             }
+        }
+    }
+}
+
+void hapustengahB(node* &headpro, node* &tailpro) {
+    node* hapus = new node;
+    if (headpro == NULL) {
+        cout << "Kosong" << endl;
+    } else {
+        if (headpro->next == tailpro) {
+            node* bantuan = new node;
+            
         }
     }
 }
