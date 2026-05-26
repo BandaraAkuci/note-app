@@ -7,12 +7,6 @@ struct node {
     node* next;
 };
 
-struct dll {
-    int info;
-    dll* prev;
-    dll* next;
-}
-
 node* head = NULL;
 node* tail = NULL;
 node* awal = NULL;
@@ -25,8 +19,6 @@ node* kiri = NULL;
 node* kanan = NULL;
 node* maju = NULL;
 node* mundur = NULL;
-ddl* buka = NULL;
-ddl* tutup = NULL;
 
 void tambahdepan(int x, node* &headpro, node* &tailpro) {
     node* baru = new node;
@@ -232,8 +224,31 @@ void hapustengahB(node* &headpro, node* &tailpro) {
         cout << "Kosong" << endl;
     } else {
         if (headpro->next == tailpro) {
-            node* bantuan = new node;
-            
+            hapus = headpro->next;
+            tailpro = headpro;
+            delete(hapus);
+            headpro->next = NULL;
+        } else {
+            if (headpro == tailpro) {
+                hapus = headpro;
+                headpro = NULL;
+                tailpro = NULL;
+                delete(hapus);
+            } else {
+                node* bantuan = new node;
+                bantuan = headpro;
+                while (bantuan->next != tailpro) {
+                    bantuan = bantuan->next;
+                }
+                hapus = bantuan;
+                node* bantuan2 = new node;
+                bantuan2 = headpro;
+                while (bantuan2->next != bantuan) {
+                    bantuan2 = bantuan2->next;
+                }
+                bantuan2->next = bantuan->next;
+                delete(hapus);
+            }
         }
     }
 }
@@ -290,24 +305,40 @@ int main() {
     tambahtengahDT(40, maju, mundur);
     tambahtengahDT(50, maju, mundur);
 
+    cout << "Tambah Depan Singular Linked List [Head] : " << head->info << endl;
     tampil(head);
+    cout << "Tambah Belakang Singular Linked List [Head] : " << awal->info << endl;
     tampil(awal);
+    cout << "Tambah Tengah Belakang Dari Head Singular Linked List [Head] : " << depan->info << endl;
     tampil(depan);
+    cout << "Tambah Tengah Depan Dari Head Singular Linked List [Head] : " << atas->info << endl;
     tampil(atas);
+    cout << "Tambah Tengah Belakang Dari Tail Singular Linked List [Head] : " << kiri->info << endl;
     tampil(kiri);
+    cout << "Tambah Tengah Depan Dari Tail Singular Linked List [Head] : " << maju->info << endl;
     tampil(maju);
     
+    cout << endl;
+    cout << endl;
+
     hapusdepan(maju, mundur);
     hapusdepan(maju, mundur);
 
     hapusbelakang(kiri, kanan);
     hapusbelakang(kiri, kanan);
 
-    hapustengah(atas, bawah);
+    hapustengahD(atas, bawah);
 
+    hapustengahB(depan, belakang);
+
+    cout << "Hapus Depan Singular Linked List [Head] : " << maju->info << endl;
     tampil(maju);
+    cout << "Hapus Belakang Singular Linked List [Head] : " << kiri->info << endl;
     tampil(kiri);
+    cout << "Hapus Tengah Dari Head Singular Linked List [Head] : " << atas->info << endl;
     tampil(atas);
+    cout << "Hapus Tengah Dari Belakang Singular Linked List [Head] : " << depan->info << endl;
+    tampil(depan);
 }
 
 // test
